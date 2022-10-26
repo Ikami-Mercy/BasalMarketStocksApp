@@ -1,0 +1,46 @@
+name: basal_test
+description: A flutter Basalt test app.
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+
+  #Tests
+  mockito: 5.2.0
+
+  # Modules
+  dependencies:
+    path: ./modules/dependencies
+  data:
+    path: ./modules/data
+  domain:
+    path: ./modules/domain
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.1.5
+  injectable_generator: ^1.5.2
+  dart_code_metrics: ^4.9.0
+  bloc_test: ^9.0.2
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/font/nunito_regular.ttf
+        - asset: assets/font/nunito_italic.ttf
+          style: italic

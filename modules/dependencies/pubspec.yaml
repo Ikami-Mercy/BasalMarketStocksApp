@@ -1,0 +1,50 @@
+name: dependencies
+description: Dependencies Management Module.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Utilities & Resources
+  cupertino_icons: ^1.0.2
+  flutter_hex_color: ^2.0.0
+  flutter_dotenv: ^5.0.2
+  fimber: ^0.6.4
+  flutter_svg: ^1.0.3
+  flutter_typeahead: ^4.0.0
+  loading_indicator: ^3.0.2
+  shimmer: ^2.0.0
+  infinite_scroll_pagination: ^3.2.0
+  jwt_decode: ^0.3.1
+
+
+  # State Management
+  flutter_bloc: ^8.0.0
+  flutter_hooks: ^0.18.1
+  equatable: ^2.0.3
+
+  # DI
+  get_it: ^7.2.0
+  injectable: ^1.5.0
+
+  # Network
+  dio: 4.0.6
+  retrofit: ^3.0.1+1
+  json_annotation: 4.6.0
+
+  # Caching
+  flutter_secure_storage: 5.0.2
+  shared_preferences: ^2.0.12
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
