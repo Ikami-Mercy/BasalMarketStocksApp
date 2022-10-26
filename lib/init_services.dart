@@ -1,7 +1,8 @@
-import 'dart:io';
-import 'dart:isolate';
+import 'package:basal_test/di/injection.dart';
+import 'package:basal_test/utils/resources/assets.dart';
+import 'package:dependencies/dependencies.dart';
 
-import 'package:data/di/injection.dart';
+import 'di/environment.dart';
 
 class InitServices {
   /// Init [Fimber] for logging
@@ -17,15 +18,13 @@ class InitServices {
   /// Load respective environment
   Future initEnv(bool isProd) async {
     try {
-      await dotenv.load(fileName: Assets.ENV_PRODUCTION);
-      await _initDI(Env.production);
-      await getIt<RemoteConfig>().setConfigSettings(
-        RemoteConfigSettings(
-          fetchTimeout: Duration(seconds: 30),
-          minimumFetchInterval: Duration(seconds: 30),
-        ),
-      );
-      await getIt<RemoteConfig>().fetchAndActivate();
+      if (isProd) {
+        await dotenv.load(fileName: Assets.ENV_PRODUCTION);
+        await _initDI(Env.production);
+      } else {
+        await dotenv.load(fileName: Assets.ENV_STAGING);
+        await _initDI(Env.test);
+      }
     } catch (e) {
       Fimber.e('Env Initialization failed: $e', ex: e);
     }
