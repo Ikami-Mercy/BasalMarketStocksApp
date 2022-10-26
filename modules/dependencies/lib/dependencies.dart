@@ -12,4 +12,7 @@ export 'package:injectable/injectable.dart';
 export 'package:retrofit/retrofit.dart' hide Parser, Query;
 export 'package:shimmer/shimmer.dart';
 export 'package:json_annotation/json_annotation.dart';
+export 'package:flutter_bloc/flutter_bloc.dart';
+
+
 

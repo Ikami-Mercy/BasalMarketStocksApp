@@ -3,6 +3,7 @@ import 'package:data/mappers/stock_data_dto_mapper.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:domain/repositories/stocks_repository.dart';
 
+@injectable
 class StockCubit extends Cubit<StockState> {
   final IStockRepository _stockRepository;
   StockDataDtoMapper dtoMapper;
