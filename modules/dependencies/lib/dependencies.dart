@@ -11,3 +11,5 @@ export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 export 'package:injectable/injectable.dart';
 export 'package:retrofit/retrofit.dart' hide Parser, Query;
 export 'package:shimmer/shimmer.dart';
+export 'package:json_annotation/json_annotation.dart';
+
