@@ -9,4 +9,7 @@ class PaginationDto {
   int? total;
 
   PaginationDto({this.limit, this.offset, this.count, this.total});
+
+  factory PaginationDto.fromJson(Map<String, dynamic> json) => _$PaginationDtoFromJson(json);
+
 }
