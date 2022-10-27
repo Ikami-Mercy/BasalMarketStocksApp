@@ -1,5 +1,6 @@
 import 'package:basal_test/ui/screens/stocks_market_page.dart';
 import 'package:basal_test/utils/resources/styles.dart';
+import 'package:data/blocs/search/search_cubit.dart';
 import 'package:data/blocs/simple_bloc_observer.dart';
 import 'package:data/blocs/stocks/stock_cubit.dart';
 import 'package:data/blocs/stocks/stock_state.dart';
@@ -36,6 +37,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => getIt<StockCubit>()),
+        BlocProvider(create: (_) => getIt<SearchCubit>()),
       ],
       child: MaterialApp(
         title: 'BasaltMarketStock App ',

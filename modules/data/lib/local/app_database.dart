@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dependencies/dependencies.dart';
 import 'package:floor/floor.dart';
+import 'package:sqflite/sqflite.dart' as sqflite;
 
 import '../dtos/stock_data_dto.dart';
 import 'dao/stock_dao.dart';

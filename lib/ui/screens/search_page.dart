@@ -1,21 +1,13 @@
-import 'package:domain/models/stock_data.dart';
+import 'package:data/blocs/search/search_cubit.dart';
+import 'package:data/blocs/search/search_state.dart';
+import 'package:data/blocs/stocks/stock_state.dart';
+import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/stocks_widget.dart';
+import 'error_state_page.dart';
+
 class SearchPage extends SearchDelegate {
-// Demo list to show querying
-  List<String> searchTerms = [
-    "Apple",
-    "Banana",
-    "Mango",
-    "Pear",
-    "Watermelons",
-    "Blueberries",
-    "Pineapples",
-    "Strawberries"
-  ];
-  List<StockData> stocksList = [];
-
-
 // first overwrite to
 // clear the search text
   @override
@@ -24,6 +16,7 @@ class SearchPage extends SearchDelegate {
       IconButton(
         onPressed: () {
           query = '';
+          context.read<SearchCubit>().resetSearchQuery();
         },
         icon: const Icon(Icons.clear),
       ),
@@ -35,6 +28,7 @@ class SearchPage extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
       onPressed: () {
+        context.read<SearchCubit>().resetSearchQuery();
         close(context, null);
       },
       icon: const Icon(Icons.arrow_back),
@@ -44,41 +38,71 @@ class SearchPage extends SearchDelegate {
 // third overwrite to show query result
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
+    context.read<SearchCubit>().filterStockDataBySearch(query.toUpperCase());
+
+    return resultsWidget();
   }
 
 // last overwrite to show the
 // querying process at the runtime
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
+    context.read<SearchCubit>().filterStockDataBySearch(query.toUpperCase());
+
+    return resultsWidget();
+  }
+
+  Widget resultsWidget() {
+    return SafeArea(
+        child: BlocBuilder<SearchCubit, SearchState>(
+      buildWhen: (prevState, currentState) {
+        return currentState is LoadingSearchState ||
+            currentState is SuccessSearchState ||
+            currentState is EmptySearchState ||
+            currentState is ErrorSearchState;
       },
+      builder: (ctx, state) {
+        if (state is LoadingSearchState) {
+          return const Center(
+            child: CircularProgressIndicator(
+              key: Key('loading_stock_data'),
+            ),
+          );
+        }
+        if (state is SuccessSearchState) {
+          return SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            key: const Key('loaded_stock_data'),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  StocksWidget(
+                    stockList: state.stockData,
+                  )
+                ],
+              ),
+            ),
+          );
+        }
+        if (state is ErrorSearchState){
+          return emptyStateUI("The symbol you have searched is not found");
+        }
+        else {
+          return emptyStateUI("Search for stock symbols");
+        }
+      },
+    ));
+  }
+
+  Widget emptyStateUI(String message) {
+    return  Center(
+      child: Text(
+        message,
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

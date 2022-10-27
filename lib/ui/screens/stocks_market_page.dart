@@ -51,6 +51,11 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
           ],
         ),
         body: SafeArea(child: BlocBuilder<StockCubit, StockState>(
+          buildWhen: (prevState, currentState) {
+            return currentState is LoadingStockState ||
+                currentState is SuccessStockState ||
+                currentState is ErrorStockState;
+          },
           builder: (ctx, state) {
             if (state is LoadingStockState) {
               return const Center(

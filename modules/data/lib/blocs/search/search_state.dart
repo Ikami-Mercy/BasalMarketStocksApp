@@ -1,35 +1,35 @@
 import 'package:dependencies/dependencies.dart';
 import 'package:domain/models/stock_data.dart';
 
-abstract class StockState extends Equatable{
-  const StockState();
+abstract class SearchState extends Equatable{
+  const SearchState();
 }
 
-class InitialStockState extends StockState{
+class InitialSearchState extends SearchState{
   @override
   List<Object?> get props => [];
 
 }
 
-class LoadingStockState extends StockState{
+class LoadingSearchState extends SearchState{
   @override
   List<Object?> get props => [];
 }
 
-class SuccessStockState extends StockState{
+class SuccessSearchState extends SearchState{
 
   final List<StockData> stockData;
 
-  const SuccessStockState({required this.stockData});
+  const SuccessSearchState({required this.stockData});
   @override
   List<Object?> get props => [stockData];
 }
 
-class ErrorStockState extends StockState{
+class ErrorSearchState extends SearchState{
   @override
   List<Object?> get props => [];
 }
-class EmptyStockState extends StockState{
+class EmptySearchState extends SearchState{
   @override
   List<Object?> get props => [];
 }
