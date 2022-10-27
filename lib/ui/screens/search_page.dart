@@ -88,21 +88,12 @@ class SearchPage extends SearchDelegate {
           );
         }
         if (state is ErrorSearchState){
-          return emptyStateUI("The symbol you have searched is not found");
+          return const ErrorStatePage( message: "The symbol you have searched is not found",);
         }
         else {
-          return emptyStateUI("Search for stock symbols");
+          return const ErrorStatePage(message:"Search for a stock symbol or exchange");
         }
       },
     ));
-  }
-
-  Widget emptyStateUI(String message) {
-    return  Center(
-      child: Text(
-        message,
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      ),
-    );
   }
 }

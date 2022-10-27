@@ -4,7 +4,7 @@ import 'package:floor/floor.dart';
 @dao
 abstract class StockDao {
   @Insert(onConflict: OnConflictStrategy.replace)
-  Future<void> saveAdvertItems(List<StockDataDto> dto);
+  Future<void> saveStocks(List<StockDataDto> dto);
 
   @Query('SELECT * FROM StockDataDto')
   Future<List<StockDataDto>> getStockData();
@@ -12,9 +12,12 @@ abstract class StockDao {
   @Query('DELETE FROM StockDataDto')
   Future<void> deleteStockData();
 
-  @Query('SELECT * FROM StockDataDto WHERE date BETWEEN :startDate AND :endDate')
-  Future<List<StockDataDto>> filterStockDataByDate(String startDate,String endDate );
+  @Query(
+      'SELECT * FROM StockDataDto WHERE date >= :startDate AND date <= :endDate')
+  Future<List<StockDataDto>> filterStockDataByDate(
+      String startDate, String endDate);
 
-  @Query('SELECT * FROM StockDataDto WHERE symbol LIKE :searchedQuery')
+  // @Query("SELECT * FROM StockDataDto WHERE symbol LIKE '%' || :searchedQuery || '%'")
+  @Query('SELECT * FROM StockDataDto WHERE symbol LIKE :searchedQuery OR exchange LIKE :searchedQuery')
   Future<List<StockDataDto>> filterStockDataBySearch(String searchedQuery);
 }

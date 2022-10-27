@@ -22,14 +22,21 @@ class StockRepository implements IStockRepository {
     try {
       StockDataResponse response =
           await apiService.fetchMarketStockData(key, limit, symbols);
-
-      var stocksToSaveLocally = response.data ?? [];
+      var formattedResponse = response.data?.map((stockData) {
+        if (stockData.date != null) {
+          stockData.date = DateFormat('yyyy-MM-dd HH:mm:ss')
+              .format(DateTime.parse(stockData.date!));
+        }
+        return stockData;
+      }).toList();
+      var stocksToSaveLocally = formattedResponse ?? [];
       if (stocksToSaveLocally.isNotEmpty) {
+        Fimber.i("stocksToSaveLocally is not empty");
         _stockDao.deleteStockData();
-        _stockDao.saveAdvertItems(stocksToSaveLocally);
+        _stockDao.saveStocks(stocksToSaveLocally);
       }
       return NetworkResponse(true,
-          data: dtoMapper.mapFromDtoListToDomain(response.data ?? []),
+          data: dtoMapper.mapFromDtoListToDomain(formattedResponse ?? []),
           extras: response.pagination?.count);
     } catch (e) {
       Fimber.e("Error fetching stock market data  $e", ex: e);

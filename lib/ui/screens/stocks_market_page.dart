@@ -54,6 +54,8 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
           buildWhen: (prevState, currentState) {
             return currentState is LoadingStockState ||
                 currentState is SuccessStockState ||
+                currentState is SuccessFilteredStockState ||
+                currentState is EmptyStockFilteredState ||
                 currentState is ErrorStockState;
           },
           builder: (ctx, state) {
@@ -65,40 +67,50 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
               );
             }
             if (state is SuccessStockState) {
-              return SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                key: const Key('loaded_stock_data'),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Visibility(
-                        visible: true,
-                        child: Center(
-                          child: Text(
-                            'Device is offline',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: AppColors.dangerBackground,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      StocksWidget(
-                        stockList: state.stockData,
-                      )
-                    ],
-                  ),
-                ),
-              );
-            } else {
-              return const ErrorStatePage();
+              return stockDataUILoaded(state.stockData);
+            }
+            if (state is SuccessFilteredStockState) {
+              return stockDataUILoaded(state.stockData);
+            }
+            if (state is EmptyStockFilteredState) {
+              return const ErrorStatePage(message: 'No data found for entered date range',);
+            }
+            else {
+              return const ErrorStatePage(message: 'An error occurred',);
             }
           },
         )));
+  }
+  Widget stockDataUILoaded(List<StockData> stockList){
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      key: const Key('loaded_stock_data'),
+      child: Padding(
+        padding:
+        const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Visibility(
+              visible: true,
+              child: Center(
+                child: Text(
+                  'Device is offline',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: AppColors.dangerBackground,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            StocksWidget(
+              stockList: stockList,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

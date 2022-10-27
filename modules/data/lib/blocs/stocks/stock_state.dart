@@ -33,3 +33,15 @@ class EmptyStockState extends StockState{
   @override
   List<Object?> get props => [];
 }
+class SuccessFilteredStockState extends StockState{
+
+  final List<StockData> stockData;
+
+  const SuccessFilteredStockState({required this.stockData});
+  @override
+  List<Object?> get props => [stockData];
+}
+class EmptyStockFilteredState extends StockState{
+  @override
+  List<Object?> get props => [];
+}

@@ -1,6 +1,9 @@
+import 'package:data/blocs/stocks/stock_cubit.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
+String startDate = '';
+String endDate = '';
 
 void showDateRangeDialog(BuildContext context) {
   showDialog(
@@ -33,6 +36,7 @@ void showDateRangeDialog(BuildContext context) {
                         child: const Text("OK"),
                         onPressed: () {
                           //PASS SELECTED DATES HERE
+                          context.read<StockCubit>().filterStockDataByDate(startDate, endDate);
                           Navigator.pop(context);
                         },
                       ),
@@ -61,6 +65,18 @@ Widget getDateRangePicker() {
     ),
   );
 }
+
 void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-  Fimber.i('Selected date ranges are ${args.value}');
+  Fimber.i("Selected date range is ${args.value}");
+  if (args.value.startDate != null) {
+    startDate = DateFormat('yyyy-MM-dd HH:mm:ss')
+        .format(args.value.startDate);
+    Fimber.i("SELECTED START DATE IS $startDate");
+
+  }
+  if (args.value.endDate != null) {
+    endDate = DateFormat('yyyy-MM-dd HH:mm:ss')
+        .format(args.value.endDate);
+  }
+
 }
