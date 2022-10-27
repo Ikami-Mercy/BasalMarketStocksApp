@@ -69,6 +69,20 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Visibility(
+                        visible: true,
+                        child: Center(
+                          child: Text(
+                            'Device is offline',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: AppColors.dangerBackground,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
                       StocksWidget(
                         stockList: state.stockData,
                       )

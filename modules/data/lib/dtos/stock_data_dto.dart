@@ -1,9 +1,13 @@
 import 'package:dependencies/dependencies.dart';
+import 'package:floor/floor.dart';
 
 part 'stock_data_dto.g.dart';
 
+@entity
 @JsonSerializable()
 class StockDataDto {
+  @PrimaryKey(autoGenerate: true)
+  int? id;
   double? open;
   double? high;
   double? low;
