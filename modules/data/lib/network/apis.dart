@@ -1,4 +1,4 @@
 class Apis {
-  static const FETCH_MARKET_STOCK = '/intraday?access_key={access_key}&sort={sorting}&symbols={symbols}';
-
+  static const FETCH_MARKET_STOCK_TICKERS = '/tickers?access_key={access_key}&limit={limit}';
+  static const FETCH_MARKET_STOCK_INTRADAY = '/intraday?access_key={access_key}&limit={limit}&symbols={symbols}';
 }

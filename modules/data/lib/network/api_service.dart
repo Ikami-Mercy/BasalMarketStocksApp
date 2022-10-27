@@ -9,7 +9,7 @@ part 'api_service.g.dart';
 abstract class ApiService{
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-  @GET(Apis.FETCH_MARKET_STOCK)
+  @GET(Apis.FETCH_MARKET_STOCK_INTRADAY)
   Future<StockDataResponse> fetchMarketStockData(
-      @Path("access_key") String key, @Path("sort") String sort, @Path("symbols") String symbols);
+      @Path("access_key") String key, @Path("limit") int limit,@Path("symbols") String symbols);
 }

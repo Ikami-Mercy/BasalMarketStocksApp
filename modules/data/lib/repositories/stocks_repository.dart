@@ -8,15 +8,18 @@ import 'package:domain/repositories/stocks_repository.dart';
 import '../network/api_service.dart';
 
 @Injectable(as: IStockRepository)
-class StockRepository extends IStockRepository{
+class StockRepository implements IStockRepository {
   final ApiService apiService;
   final StockDataDtoMapper dtoMapper = StockDataDtoMapper();
 
   StockRepository(this.apiService);
+
   @override
-  Future<NetworkResponse<List<StockData>>> fetchStockMarketData(String key, String sort, String symbols) async{
+  Future<NetworkResponse<List<StockData>>> fetchStockMarketData(
+      String key, int limit, String symbols) async {
     try {
-      StockDataResponse response = await apiService.fetchMarketStockData(key,sort,symbols);
+      StockDataResponse response =
+          await apiService.fetchMarketStockData(key, limit, symbols);
 
       Fimber.i('RESPONSE DATA IS ${response.data}');
 
@@ -24,9 +27,8 @@ class StockRepository extends IStockRepository{
           data: dtoMapper.mapFromDtoListToDomain(response.data ?? []),
           extras: response.pagination?.count);
     } catch (e) {
-      Fimber.e("Error fetching stock market data  $e", ex:e);
+      Fimber.e("Error fetching stock market data  $e", ex: e);
       return NetworkResponse(false);
     }
   }
-
 }

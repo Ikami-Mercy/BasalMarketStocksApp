@@ -12,6 +12,7 @@ class InitServices {
 
   /// Init DI with the respective environment
   Future<void> _initDI(String environment) async {
+    Fimber.i('_initDI is called!');
     await configureInjection(environment);
   }
 
@@ -20,9 +21,10 @@ class InitServices {
     try {
       if (isProd) {
         await dotenv.load(fileName: Assets.ENV_PRODUCTION);
+        Fimber.i('Dot env is loaded!');
         await _initDI(Env.production);
       } else {
-        await dotenv.load(fileName: Assets.ENV_STAGING);
+        await dotenv.load(fileName: Assets.ENV_TESTING);
         await _initDI(Env.test);
       }
     } catch (e) {
