@@ -10,15 +10,16 @@ class StockItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
+    return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Symbol',
@@ -41,17 +42,8 @@ class StockItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                child: SizedBox(
-                  height: 40,
-                  child: VerticalDivider(
-                    color: AppColors.borderColor,
-                    thickness: 1,
-                  ),
-                ),
-              ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Exchange',
@@ -64,7 +56,7 @@ class StockItemWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 4,),
                   Text(
-                    stock.symbol ?? '',
+                    stock.exchange ?? '',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.textColorNormal,
@@ -88,8 +80,10 @@ class StockItemWidget extends StatelessWidget {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Open : ${stock.open}',
@@ -123,6 +117,7 @@ class StockItemWidget extends StatelessWidget {
                 ),
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Close : ${stock.close}',
@@ -147,8 +142,8 @@ class StockItemWidget extends StatelessWidget {
               )
             ],
           ),
-        ],
-      )),
-    );
+      ],
+    ),
+        ));
   }
 }

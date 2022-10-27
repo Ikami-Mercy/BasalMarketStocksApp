@@ -1,6 +1,14 @@
+import 'package:basal_test/ui/screens/search_page.dart';
 import 'package:data/blocs/stocks/stock_cubit.dart';
+import 'package:data/blocs/stocks/stock_state.dart';
 import 'package:dependencies/dependencies.dart';
+import 'package:domain/models/stock_data.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/resources/colors.dart';
+import '../../utils/utils.dart';
+import '../widgets/stocks_widget.dart';
+import 'error_state_page.dart';
 
 class StocksMarketPage extends StatefulWidget {
   const StocksMarketPage({Key? key}) : super(key: key);
@@ -10,21 +18,68 @@ class StocksMarketPage extends StatefulWidget {
 }
 
 class _StocksMarketPageState extends State<StocksMarketPage> {
+  List<StockData> stocksList = [];
 
-  void _incrementCounter() {
-
+  @override
+  void initState() {
     context.read<StockCubit>().loadStockMarketData();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
+    return Scaffold(
+        backgroundColor: AppColors.colorBackground,
+        appBar: AppBar(
+          title: const Text(
+            "Market Stock Details",
           ),
-    ));
+          actions: [
+            IconButton(
+              onPressed: () {
+                // method to show the search bar
+                showSearch(context: context, delegate: SearchPage());
+              },
+              icon: const Icon(Icons.search),
+            ),
+            IconButton(
+              onPressed: () {
+                showDateRangeDialog(context);
+              },
+              icon: const Icon(Icons.date_range_rounded),
+            ),
+          ],
+        ),
+        body: SafeArea(child: BlocBuilder<StockCubit, StockState>(
+          builder: (ctx, state) {
+            if (state is LoadingStockState) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  key: Key('loading_stock_data'),
+                ),
+              );
+            }
+            if (state is SuccessStockState) {
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                key: const Key('loaded_stock_data'),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      StocksWidget(
+                        stockList: state.stockData,
+                      )
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return const ErrorStatePage();
+            }
+          },
+        )));
   }
 }

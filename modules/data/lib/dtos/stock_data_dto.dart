@@ -9,7 +9,7 @@ class StockDataDto {
   double? low;
   double? last;
   double? close;
-  int? volume;
+  double? volume;
   String? date;
   String? symbol;
   String? exchange;

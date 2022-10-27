@@ -1,4 +1,5 @@
 import 'package:basal_test/ui/screens/stocks_market_page.dart';
+import 'package:basal_test/utils/resources/styles.dart';
 import 'package:data/blocs/simple_bloc_observer.dart';
 import 'package:data/blocs/stocks/stock_cubit.dart';
 import 'package:data/blocs/stocks/stock_state.dart';
@@ -10,10 +11,11 @@ import 'init_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Styles.setStatusBarColor();
 
-  InitServices().initLogger();
+
   await InitServices().initEnv(true);
-
+  InitServices().initLogger();
 
   BlocOverrides.runZoned(
     () => runApp(const MyApp()),
@@ -40,6 +42,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          fontFamily: 'Nunito',
         ),
         home: BlocBuilder<StockCubit, StockState>(builder: (ctx, state) {
           return const StocksMarketPage();

@@ -8,10 +8,11 @@ class StockDataDtoMapper extends DtoMapper<StockDataDto, StockData> {
   StockData mapFromDto(StockDataDto dto) {
     return StockData(
       open: dto.open,
-      high: dto.high ?? 0,
-      last: dto.last ?? 0,
-      close: dto.close ?? 0,
-      volume: dto.volume ?? 0,
+      high: dto.high ,
+      low: dto.low ,
+      last: dto.last,
+      close: dto.close,
+      volume: dto.volume,
       date: dto.date ?? '',
       symbol: dto.symbol ?? '',
       exchange: dto.exchange ?? '',
@@ -22,10 +23,11 @@ class StockDataDtoMapper extends DtoMapper<StockDataDto, StockData> {
   StockDataDto mapToDto(StockData domain) {
     return StockDataDto(
       open: domain.open,
-      high: domain.high ?? 0,
-      last: domain.last ?? 0,
-      close: domain.close ?? 0,
-      volume: domain.volume ?? 0,
+      high: domain.high,
+      low: domain.low,
+      last: domain.last,
+      close: domain.close,
+      volume: domain.volume,
       date: domain.date ?? '',
       symbol: domain.symbol ?? '',
       exchange: domain.exchange ?? '',

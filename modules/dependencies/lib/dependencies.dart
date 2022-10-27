@@ -13,6 +13,9 @@ export 'package:retrofit/retrofit.dart' hide Parser, Query;
 export 'package:shimmer/shimmer.dart';
 export 'package:json_annotation/json_annotation.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_svg/flutter_svg.dart';
+export 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
 
 
 
