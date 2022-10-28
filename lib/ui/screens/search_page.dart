@@ -88,10 +88,10 @@ class SearchPage extends SearchDelegate {
           );
         }
         if (state is ErrorSearchState){
-          return const ErrorStatePage( message: AppStrings.symbolNotFound,);
+          return const ErrorStatePage( message: AppStrings.symbolNotFound,isConnectedToInternet: false,);
         }
         else {
-          return const ErrorStatePage(message:AppStrings.searchForSymbol);
+          return const ErrorStatePage(message:AppStrings.searchForSymbol,isConnectedToInternet: false,);
         }
       },
     ));

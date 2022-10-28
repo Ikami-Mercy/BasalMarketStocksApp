@@ -7,7 +7,7 @@ class AppStrings{
   static const String marketStockDetails = "Market Stock Details";
   static const String exchange = 'Exchange';
   static const String open = 'Open :';
-  static const String low = 'Low  :';
+  static const String low = 'Low :';
   static const String close = 'Close :';
   static const String high = 'High :';
 }

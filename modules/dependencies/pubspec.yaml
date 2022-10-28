@@ -25,6 +25,7 @@ dependencies:
   intl: ^0.17.0
 
 
+
   # State Management
   flutter_bloc: ^8.0.0
   flutter_hooks: ^0.18.1
@@ -39,6 +40,7 @@ dependencies:
   retrofit: ^3.0.1+1
   json_annotation: 4.6.0
   internet_connection_checker: 1.0.0+1
+  connectivity_plus: ^3.0.2
 
   # Caching
   flutter_secure_storage: 5.0.2

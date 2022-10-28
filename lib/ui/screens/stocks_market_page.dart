@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/resources/colors.dart';
 import '../../utils/utils.dart';
+import '../widgets/no_internet_widget.dart';
 import '../widgets/stocks_widget.dart';
 import 'error_state_page.dart';
 
@@ -38,7 +39,6 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
           actions: [
             IconButton(
               onPressed: () {
-                // method to show the search bar
                 showSearch(context: context, delegate: SearchPage());
               },
               icon: const Icon(Icons.search),
@@ -51,7 +51,8 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
             ),
           ],
         ),
-        body: SafeArea(child: BlocBuilder<StockCubit, StockState>(
+        body: SafeArea(
+            child: BlocBuilder<StockCubit, StockState>(
           buildWhen: (prevState, currentState) {
             return currentState is LoadingStockState ||
                 currentState is SuccessStockState ||
@@ -60,6 +61,7 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
                 currentState is ErrorStockState;
           },
           builder: (ctx, state) {
+            Fimber.i('State is $state');
             if (state is LoadingStockState) {
               return const Center(
                 child: CircularProgressIndicator(
@@ -74,38 +76,30 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
               return stockDataUILoaded(state.stockData);
             }
             if (state is EmptyStockFilteredState) {
-              return const ErrorStatePage(message: AppStrings.noDataFound,);
-            }
-            else {
-              return const ErrorStatePage(message: AppStrings.errorOccurred,);
+              return const ErrorStatePage(
+                message: AppStrings.noDataFound,
+                isConnectedToInternet: true,
+              );
+            } else {
+              return const ErrorStatePage(
+                message: AppStrings.errorOccurred,
+                isConnectedToInternet: true,
+              );
             }
           },
         )));
   }
-  Widget stockDataUILoaded(List<StockData> stockList){
+
+  Widget stockDataUILoaded(List<StockData> stockList) {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       key: const Key('loaded_stock_data'),
       child: Padding(
-        padding:
-        const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Visibility(
-              visible: true,
-              child: Center(
-                child: Text(
-                  AppStrings.deviceOffline,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: AppColors.dangerBackground,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
+            const NoInternetWidget(connectedToInternet:true),
             StocksWidget(
               stockList: stockList,
             )

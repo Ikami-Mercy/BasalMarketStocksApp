@@ -16,6 +16,7 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:syncfusion_flutter_datepicker/datepicker.dart';
 export 'package:intl/intl.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
 
 
 
