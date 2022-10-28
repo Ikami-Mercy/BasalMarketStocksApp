@@ -1,4 +1,4 @@
-# basalt_test
+# MarketStocks App
 
 Flutter App that shows the stock market report of 10 random
 companies.
