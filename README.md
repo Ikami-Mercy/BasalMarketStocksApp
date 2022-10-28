@@ -28,8 +28,10 @@ foo@bar:~$ git clone https://github.com/Ikami-Mercy/BasalMarketStocksApp.git
 
 - Setup env files
 ```
-Add two .env file 'testing' and 'production' in assets/env/testing/ directory and  assets/env/production/
-Add the Marketstack Api key in both the directories with MARKET_STACK_API_KEY as the key and value as the ApiKey as follows:
+Add two .env file 'testing' and 'production' in assets/env/testing/ directory
+ and  assets/env/production/ directory
+Add the Marketstack Api key in both the directories with MARKET_STACK_API_KEY as the key
+ and value as the ApiKey as follows:
 MARKET_STACK_API_KEY=YOUR_API_KEY
 Add a DB_NAME key in both the directories with DB_NAME as the key and value as the database name value as follows:
 DB_NAME=basalt_db
