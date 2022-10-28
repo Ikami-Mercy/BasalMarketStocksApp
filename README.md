@@ -3,7 +3,7 @@
 Flutter App that shows the stock market report of 10 random
 companies.
 
-##TASK
+###TASK
 - Build a flutter app that shows the stock market report of 10 random
 companies.
 - Add a date range and an auto complete search box to the UI. The autocomplete feature
@@ -116,4 +116,3 @@ The domain module deals with the model classes which hold the data used in the `
 - [Floor](https://pub.dev/packages/floor)
 - [Testing](https://medium.com/flutter-community/tagged/testing)
 - [Managing Multi package Flutter App](https://medium.com/flutter-community/managing-multi-package-flutter-projects-with-melos-c8ce96fa7c82)
-- [Setup Match](https://medium.com/@abedalkareemomreyh/ios-continuous-integration-and-delivery-using-bitrise-and-fastlane-part-2-7daccfa1ed96)
