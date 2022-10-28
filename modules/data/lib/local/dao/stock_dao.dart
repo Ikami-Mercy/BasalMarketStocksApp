@@ -17,7 +17,6 @@ abstract class StockDao {
   Future<List<StockDataDto>> filterStockDataByDate(
       String startDate, String endDate);
 
-  // @Query("SELECT * FROM StockDataDto WHERE symbol LIKE '%' || :searchedQuery || '%'")
-  @Query('SELECT * FROM StockDataDto WHERE symbol LIKE :searchedQuery OR exchange LIKE :searchedQuery')
+  @Query('SELECT * FROM StockDataDto WHERE symbol LIKE :searchedQuery')
   Future<List<StockDataDto>> filterStockDataBySearch(String searchedQuery);
 }

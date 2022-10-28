@@ -2,9 +2,10 @@ import 'package:basal_test/utils/resources/strings.dart';
 import 'package:data/blocs/search/search_cubit.dart';
 import 'package:data/blocs/search/search_state.dart';
 import 'package:dependencies/dependencies.dart';
+import 'package:domain/models/stock_data.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/stocks_widget.dart';
+import '../widgets/stock_item_widget.dart';
 import 'error_state_page.dart';
 
 class SearchPage extends SearchDelegate {
@@ -35,53 +36,48 @@ class SearchPage extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     context.read<SearchCubit>().filterStockDataBySearch(query.toUpperCase());
-
     return resultsWidget();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     context.read<SearchCubit>().filterStockDataBySearch(query.toUpperCase());
-
     return resultsWidget();
   }
 
   Widget resultsWidget() {
+    List<StockData> stockList = [];
     return SafeArea(
-        child: BlocBuilder<SearchCubit, SearchState>(
-      buildWhen: (prevState, currentState) {
-        return currentState is LoadingSearchState ||
-            currentState is SuccessSearchState ||
-            currentState is EmptySearchState ||
-            currentState is ErrorSearchState;
+        child: BlocConsumer<SearchCubit, SearchState>(
+      listener: (ctx, state) {
+        if (state is SuccessSearchState) {
+          state.stockData.map((element) {
+            stockList.add(element);
+          }).toList();
+        }
       },
       builder: (ctx, state) {
         if (state is LoadingSearchState) {
           return const Center(
             child: CircularProgressIndicator(
-              key: Key('loading_stock_data'),
+              key: Key('loading_search_data'),
             ),
           );
         }
         if (state is SuccessSearchState) {
-          return SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            key: const Key('loaded_stock_data'),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  StocksWidget(
-                    stockList: state.stockData,
-                  )
-                ],
-              ),
-            ),
+          return ListView.builder(
+            key: const Key('loaded_search_data'),
+            itemCount: stockList.length,
+            itemBuilder: (context, index) {
+              var result = stockList[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: StockItemWidget(stock: result),
+              );
+            },
           );
         }
-        if (state is ErrorSearchState) {
+        if (state is EmptySearchState) {
           return const ErrorStatePage(
             message: AppStrings.symbolNotFound,
           );
