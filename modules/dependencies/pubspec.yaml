@@ -23,7 +23,7 @@ dependencies:
   jwt_decode: ^0.3.1
   syncfusion_flutter_datepicker: ^20.3.52
   intl: ^0.17.0
-
+  splash_screen_view: ^3.0.0
 
 
   # State Management
@@ -40,7 +40,6 @@ dependencies:
   dio: 4.0.6
   retrofit: ^3.0.1+1
   json_annotation: 4.6.0
-  internet_connection_checker: 1.0.0+1
   connectivity_plus: ^3.0.2
 
   # Caching

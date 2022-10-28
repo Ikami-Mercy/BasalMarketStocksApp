@@ -1,4 +1,4 @@
-# basal_test
+# basalt_test
 
 A new Flutter project.
 

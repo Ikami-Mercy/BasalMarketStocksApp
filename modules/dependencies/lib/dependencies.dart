@@ -16,9 +16,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:syncfusion_flutter_datepicker/datepicker.dart';
 export 'package:intl/intl.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
-export 'package:internet_connection_checker/internet_connection_checker.dart';
-export 'package:provider/provider.dart';
-
+export 'package:splash_screen_view/SplashScreenView.dart';
 
 
 

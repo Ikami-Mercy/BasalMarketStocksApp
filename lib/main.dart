@@ -1,4 +1,6 @@
 import 'package:basal_test/ui/screens/stocks_market_page.dart';
+import 'package:basal_test/utils/resources/assets.dart';
+import 'package:basal_test/utils/resources/strings.dart';
 import 'package:basal_test/utils/resources/styles.dart';
 import 'package:data/blocs/internet/network_bloc.dart';
 import 'package:data/blocs/internet/network_event.dart';
@@ -9,6 +11,7 @@ import 'package:data/blocs/stocks/stock_state.dart';
 import 'package:data/di/injection.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
+
 
 import 'init_services.dart';
 
@@ -50,7 +53,19 @@ class _MyAppState extends State<MyApp> {
           fontFamily: 'Nunito',
         ),
         home: BlocBuilder<StockCubit, StockState>(builder: (ctx, state) {
-          return const StocksMarketPage();
+          return SplashScreenView(
+            navigateRoute: const StocksMarketPage(),
+            duration: 3000,
+            imageSize: 100,
+            imageSrc:Assets.logoIcon,
+            text: AppStrings.splashString,
+            textStyle: const TextStyle(
+              fontSize: 30.0,
+              color: Colors.lightBlue
+            ),
+            backgroundColor: Colors.white,
+          );
+         // return const StocksMarketPage();
         }),
       ),
     );

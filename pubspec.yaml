@@ -41,6 +41,7 @@ flutter:
   assets:
     - assets/env/production/
     - assets/env/testing/
+    - assets/icons/logo.png
 
   fonts:
     - family: Nunito

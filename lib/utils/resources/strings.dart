@@ -11,4 +11,5 @@ class AppStrings{
   static const String low = 'Low :';
   static const String close = 'Close :';
   static const String high = 'High :';
+  static const String splashString = 'BASALT';
 }
