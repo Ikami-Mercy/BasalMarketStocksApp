@@ -15,12 +15,9 @@ class SearchCubit extends Cubit<SearchState> {
 
   void filterStockDataBySearch(String searchedQuery) async {
     try {
-      //var filteredStockData = await _stockDao.filterStockDataBySearch(searchedQuery);
-      Fimber.i('Filtered results is $searchedQuery');
-      var queryToSearch = searchedQuery.isEmpty?searchedQuery:'%$searchedQuery%';
-      var filteredStockData = await _stockDao.filterStockDataBySearch('%$searchedQuery%');
+      var filteredStockData =
+          await _stockDao.filterStockDataBySearch('%$searchedQuery%');
       filteredStock = dtoMapper.mapFromDtoListToDomain(filteredStockData);
-      Fimber.i('filteredStock is ${filteredStock.length}');
       if (filteredStock.isNotEmpty) {
         emit(SuccessSearchState(stockData: filteredStock));
       } else {

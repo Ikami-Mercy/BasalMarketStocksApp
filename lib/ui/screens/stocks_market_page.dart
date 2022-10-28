@@ -51,46 +51,52 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
             ),
           ],
         ),
-        body: SafeArea(
-          child: BlocBuilder<StockCubit, StockState>(
-            buildWhen: (prevState, currentState) {
-              return currentState is LoadingStockState ||
-                  currentState is SuccessStockState ||
-                  currentState is SuccessFilteredStockState ||
-                  currentState is EmptyStockFilteredState ||
-                  currentState is ErrorStockState;
-            },
-            builder: (ctx, state) {
-              Fimber.i('State is $state');
-              if (state is LoadingStockState) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    key: Key('loading_stock_data'),
-                  ),
+        body: RefreshIndicator(
+          onRefresh: () => Future.sync(
+              () => context.read<StockCubit>().loadStockMarketData()),
+          child: SafeArea(
+            child: BlocBuilder<StockCubit, StockState>(
+              buildWhen: (prevState, currentState) {
+                return currentState is LoadingStockState ||
+                    currentState is SuccessStockState ||
+                    currentState is SuccessFilteredStockState ||
+                    currentState is EmptyStockFilteredState ||
+                    currentState is ErrorStockState;
+              },
+              builder: (ctx, state) {
+                if (state is LoadingStockState) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      key: Key('loading_stock_data'),
+                    ),
+                  );
+                }
+                if (state is SuccessStockState) {
+                  return stockDataUILoaded(
+                    state.stockData,
+                  );
+                }
+                if (state is SuccessFilteredStockState) {
+                  return stockDataUILoaded(
+                    state.stockData,
+                  );
+                } else if (state is ErrorStockState) {
+                  return ErrorStatePage(
+                    message: state.errorMessage,
+                  );
+                }
+                return const ErrorStatePage(
+                  message: AppStrings.noDataFound,
                 );
-              }
-              if (state is SuccessStockState) {
-                return stockDataUILoaded(
-                    state.stockData,);
-              }
-              if (state is SuccessFilteredStockState) {
-                return stockDataUILoaded(
-                    state.stockData,);
-              }
-               else if(state is ErrorStockState) {
-                return ErrorStatePage(
-                  message: state.errorMessage,
-                );
-              }
-              return const ErrorStatePage(
-                message: AppStrings.noDataFound,
-              );
-            },
+              },
+            ),
           ),
         ));
   }
 
-  Widget stockDataUILoaded(List<StockData> stockList,) {
+  Widget stockDataUILoaded(
+    List<StockData> stockList,
+  ) {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       key: const Key('loaded_stock_data'),

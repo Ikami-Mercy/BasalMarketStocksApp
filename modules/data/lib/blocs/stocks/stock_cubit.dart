@@ -53,11 +53,9 @@ class StockCubit extends Cubit<StockState> {
   void filterStockDataByDate(String startDate, String endDate) async {
     try {
       emit(LoadingStockState());
-      Fimber.i("startDate is $startDate and endDate $endDate");
       var filteredStockData =
           await _stockDao.filterStockDataByDate(startDate, endDate);
       filteredStock = dtoMapper.mapFromDtoListToDomain(filteredStockData);
-      Fimber.i("filteredStock is $filteredStock");
       if (filteredStock.isNotEmpty) {
         emit(SuccessFilteredStockState(stockData: filteredStock));
       } else {
