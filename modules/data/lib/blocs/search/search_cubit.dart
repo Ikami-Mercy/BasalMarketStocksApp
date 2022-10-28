@@ -6,17 +6,17 @@ import 'package:domain/models/stock_data.dart';
 
 @injectable
 class SearchCubit extends Cubit<SearchState> {
-  final StockDao _stockDao;
+  final StockDao stockDao;
   List<StockData> locallySavedStocks = [];
   List<StockData> filteredStock = [];
   StockDataDtoMapper dtoMapper = StockDataDtoMapper();
 
-  SearchCubit(this._stockDao) : super(InitialSearchState());
+  SearchCubit(this.stockDao) : super(InitialSearchState());
 
   void filterStockDataBySearch(String searchedQuery) async {
     try {
       var filteredStockData =
-          await _stockDao.filterStockDataBySearch('%$searchedQuery%');
+          await stockDao.filterStockDataBySearch('%$searchedQuery%');
       filteredStock = dtoMapper.mapFromDtoListToDomain(filteredStockData);
       if (filteredStock.isNotEmpty) {
         emit(SuccessSearchState(stockData: filteredStock));
