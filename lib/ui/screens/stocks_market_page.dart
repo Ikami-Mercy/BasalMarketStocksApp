@@ -32,6 +32,7 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
     return Scaffold(
         backgroundColor: AppColors.colorBackground,
         appBar: AppBar(
+          key: const Key('stockMarketPageUI'),
           title: const Text(
             AppStrings.marketStockDetails,
           ),
