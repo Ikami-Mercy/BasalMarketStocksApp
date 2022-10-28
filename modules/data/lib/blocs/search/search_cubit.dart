@@ -25,13 +25,12 @@ class SearchCubit extends Cubit<SearchState> {
       }
     } catch (e) {
       Fimber.e("Error searching Stock Data: $e", ex: e);
-      if (locallySavedStocks.isEmpty) {
         emit(ErrorSearchState());
-      }
+
     }
   }
 
   void resetSearchQuery() {
-    emit(EmptySearchState());
+    emit(InitialSearchState());
   }
 }

@@ -24,8 +24,7 @@ class StockCubit extends Cubit<StockState> {
       var response = await _stockRepository.fetchStockMarketData(key,
           Constants.PAGINATION_PAGE_SIZE, Constants.stockMarketSymbolsArray);
       if (response.success) {
-        Fimber.i(
-            'SuccessStockState emitted and page count is: ${response.extras}');
+        Fimber.i('SuccessStockState emitted and page count is: ${response.extras}');
         emit(SuccessStockState(stockData: response.data!));
       }
       else{

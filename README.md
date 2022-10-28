@@ -90,8 +90,6 @@ The domain module deals with the model classes which hold the data used in the `
 - [Dependency Injection in Multi-Module Project](https://abdulhakeemahmoood.medium.com/dependency-injection-in-multi-module-flutter-project-a2bbf99b14ff)
 - [Bloc Pattern](https://blog.logrocket.com/state-management-flutter-bloc-pattern/)
 - [Bloc Fundamentals](https://bloclibrary.dev/#/coreconcepts?id=state-changes)
-- [Phrase](https://phrase.com/)
-- [Phrase Step-by-Step Translation](https://www.youtube.com/watch?v=kJZsTiev3oA)
 - [Setting up build flavors](https://medium.com/@animeshjain/build-flavors-in-flutter-android-and-ios-with-different-firebase-projects-per-flavor-27c5c5dac10b)
 - [Generating IPA on flutter](https://jtmuller5-98869.medium.com/flutter-build-an-ipa-90520e813a96)
 - [Setting Up CI](https://medium.com/kinandcartacreated/setup-a-flutter-ci-cd-with-gitlab-ci-part-1-8d40b7a3b3dc)

@@ -20,7 +20,6 @@ class StocksMarketPage extends StatefulWidget {
 }
 
 class _StocksMarketPageState extends State<StocksMarketPage> {
-  List<StockData> stocksList = [];
 
   @override
   void initState() {
@@ -58,7 +57,7 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
             child: BlocConsumer<StockCubit, StockState>(
               listener: (ctx, state) async {
                 if (state is ErrorWithCachedStockState) {
-                  showToastUI(state.errorMessage,error: true);
+                  showToastUI(state.errorMessage, error: true);
                 }
               },
               buildWhen: (prevState, currentState) {
@@ -99,24 +98,26 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
         ));
   }
 
-  Widget stockDataUILoaded(
-    List<StockData> stockList,
-  ) {
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      key: const Key('loaded_stock_data'),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const NoInternetWidget(),
-            StocksWidget(
-              stockList: stockList,
-            )
-          ],
+  Widget stockDataUILoaded(List<StockData> stockList,) {
+    return Stack(
+      children: [
+        Positioned(
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            key: const Key('loaded_stock_data'),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+              child: StocksWidget(
+                stockList: stockList,
+              ),
+            ),
+          ),
         ),
-      ),
+        const Positioned(
+          child: NoInternetWidget(),
+        )
+      ],
     );
   }
 }

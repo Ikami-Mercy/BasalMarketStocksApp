@@ -21,29 +21,37 @@ class _NoInternetWidgetState extends State<NoInternetWidget> {
       return currentState is NetworkFailure || currentState is NetworkSuccess;
     }, builder: (ctx, state) {
       if (state is NetworkFailure) {
-        return Center(
-          child: Text(
-            AppStrings.deviceOffline,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: AppColors.dangerBackground,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.dangerBackground,
+                border: Border.all(
+                  color: AppColors.borderColor,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(4),
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
+                child: Text(
+                  AppStrings.deviceOffline,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
             ),
           ),
         );
       } else if (state is NetworkSuccess) {
-        return const Center(
-          child: Text(
-            AppStrings.deviceOnline,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: Colors.lightBlueAccent,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        );
+        return const SizedBox.shrink();
       } else {
         return const SizedBox.shrink();
       }
