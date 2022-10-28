@@ -3,7 +3,7 @@
 Flutter App that shows the stock market report of 10 random
 companies.
 
-###TASK
+## TASK
 - Build a flutter app that shows the stock market report of 10 random
 companies.
 - Add a date range and an auto complete search box to the UI. The autocomplete feature
@@ -59,26 +59,6 @@ foo@bar:~$ flutter run
 ```console
 foo@bar:~$ sh scripts/ci.sh --delete_generated
 ```
-
-## Environment Configuration
-
-The project has 2 environments setup:
-- Testing
-- Production
-
-To setup the relevant run configuration:
-
-#### Android Studio
-
-Click on the run configuration drop down
-
-![Run Configuration](art/run_configuration.png)
-
-Add the run flags for the relevant configuration i.e `--flavor testing` for testing environment and `--flavor prod` for production environment
-
-![Run Configuration](art/edit_run_configuration.png)
-
-Select the relevant configuration and run the project
 
 ## Architecture
 
