@@ -41,11 +41,7 @@ void main() {
     test('on initialize, initial state is InitialSearchState', () {
       expect(searchCubit.state, InitialSearchState());
     });
-
-    test('on initialize, initial state is InitialStockState', () {
-      expect(stockCubit.state, InitialStockState());
-    });
-
+    
     blocTest<SearchCubit, SearchState>(
         'on filterStockDataBySearch, and error is thrown, state is ErrorSearchState',
         build: () {

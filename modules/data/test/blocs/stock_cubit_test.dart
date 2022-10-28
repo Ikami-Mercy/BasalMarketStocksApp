@@ -3,7 +3,6 @@ import 'package:data/blocs/stocks/stock_cubit.dart';
 import 'package:data/blocs/stocks/stock_state.dart';
 import 'package:data/dtos/stock_data_dto.dart';
 import 'package:data/local/dao/stock_dao.dart';
-import 'package:data/mappers/stock_data_dto_mapper.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:domain/network_response.dart';
 import 'package:domain/repositories/stocks_repository.dart';
@@ -13,13 +12,13 @@ import 'package:mockito/mockito.dart';
 
 import 'stock_cubit_test.mocks.dart';
 
-
-@GenerateMocks([StockDao,IStockRepository])
+@GenerateMocks([StockDao, IStockRepository])
 void main() {
   group('Stock Cubit', () {
     late StockDao stockDao;
     late StockCubit stockCubit;
     late IStockRepository stockRepository;
+    late List<StockDataDto> stockDataDto;
 
     TestWidgetsFlutterBinding.ensureInitialized();
     dotenv.testLoad(mergeWith: {'MARKET_STACK_API_KEY': 'testKey'});
@@ -27,7 +26,7 @@ void main() {
     setUp(() {
       stockDao = MockStockDao();
       stockRepository = MockIStockRepository();
-      stockCubit = StockCubit(stockRepository,stockDao);
+      stockCubit = StockCubit(stockRepository, stockDao);
       stockDataDto = <StockDataDto>[
         StockDataDto(
             open: 1.0,
@@ -48,53 +47,52 @@ void main() {
     blocTest<StockCubit, StockState>(
         'on loadStockMarketData, and error is thrown, state is LoadingStockState then ErrorStockState',
         build: () {
-          when(stockRepository.fetchStockMarketData(
-            'testKey',3,'1'
-          )).thenAnswer((_) async => NetworkResponse(false,error: 'error'));
+          when(stockRepository.fetchStockMarketData('testKey', 3, '1'))
+              .thenAnswer((_) async => NetworkResponse(false, error: 'error'));
 
           return stockCubit;
         },
-        act: (cubit) => stockCubit.loadStockMarketData(
-        ),
-        expect: () => [LoadingStockState(),const ErrorStockState(errorMessage: 'Unexpected error occurred')]);
+        act: (cubit) => stockCubit.loadStockMarketData(),
+        expect: () => [
+              LoadingStockState(),
+              const ErrorStockState(errorMessage: 'Unexpected error occurred')
+            ]);
 
     blocTest<StockCubit, StockState>(
         'on loadLocalStockMarketData, and local data is empty, state emitted is LoadingStockState then EmptyStockState',
         build: () {
-          when(stockDao.getStockData(
-          )).thenAnswer((_) async => Future.value([]));
+          when(stockDao.getStockData())
+              .thenAnswer((_) async => Future.value([]));
           return stockCubit;
         },
-        act: (cubit) => stockCubit.loadLocalStockMarketData(
-        ),
+        act: (cubit) => stockCubit.loadLocalStockMarketData(),
         expect: () => [LoadingStockState()]);
-
 
     blocTest<StockCubit, StockState>(
         'on filterStockDataByDate, and filtered data is empty, state emitted is LoadingStockState then EmptyStockFilteredState',
         build: () {
           when(stockDao.filterStockDataByDate(
-              '2022-10-21 00:00:00','2022-10-21 00:00:00'
-          )).thenAnswer((_) async => Future.value([]));
+                  '2022-10-21 00:00:00', '2022-10-21 00:00:00'))
+              .thenAnswer((_) async => Future.value([]));
           return stockCubit;
         },
         act: (cubit) => stockCubit.filterStockDataByDate(
-            '2022-10-21 00:00:00','2022-10-21 00:00:00'
-        ),
+            '2022-10-21 00:00:00', '2022-10-21 00:00:00'),
         expect: () => [LoadingStockState(), EmptyStockFilteredState()]);
 
     blocTest<StockCubit, StockState>(
         'on filterStockDataByDate, and an error is thrown, state emitted is LoadingStockState then ErrorStockState',
         build: () {
           when(stockDao.filterStockDataByDate(
-              '2022-10-21 00:00:00','2022-10-21 00:00:00'
-          )).thenThrow('error');
+                  '2022-10-21 00:00:00', '2022-10-21 00:00:00'))
+              .thenThrow('error');
           return stockCubit;
         },
         act: (cubit) => stockCubit.filterStockDataByDate(
-            '2022-10-21 00:00:00','2022-10-21 00:00:00'
-        ),
-        expect: () => [LoadingStockState(), const ErrorStockState(errorMessage: 'Unexpected error occurred')]);
-
+            '2022-10-21 00:00:00', '2022-10-21 00:00:00'),
+        expect: () => [
+              LoadingStockState(),
+              const ErrorStockState(errorMessage: 'Unexpected error occurred')
+            ]);
   });
 }
