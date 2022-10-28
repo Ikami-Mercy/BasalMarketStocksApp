@@ -4,6 +4,7 @@ Flutter App that shows the stock market report of 10 random
 companies.
 
 ## TASK
+- Use [MarketStack API](https://marketstack.com/)
 - Build a flutter app that shows the stock market report of 10 random
 companies.
 - Add a date range and an auto complete search box to the UI. The autocomplete feature
