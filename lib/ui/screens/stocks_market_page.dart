@@ -1,4 +1,5 @@
 import 'package:basal_test/ui/screens/search_page.dart';
+import 'package:basal_test/utils/resources/strings.dart';
 import 'package:data/blocs/stocks/stock_cubit.dart';
 import 'package:data/blocs/stocks/stock_state.dart';
 import 'package:dependencies/dependencies.dart';
@@ -32,7 +33,7 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
         backgroundColor: AppColors.colorBackground,
         appBar: AppBar(
           title: const Text(
-            "Market Stock Details",
+            AppStrings.marketStockDetails,
           ),
           actions: [
             IconButton(
@@ -73,10 +74,10 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
               return stockDataUILoaded(state.stockData);
             }
             if (state is EmptyStockFilteredState) {
-              return const ErrorStatePage(message: 'No data found for entered date range',);
+              return const ErrorStatePage(message: AppStrings.noDataFound,);
             }
             else {
-              return const ErrorStatePage(message: 'An error occurred',);
+              return const ErrorStatePage(message: AppStrings.errorOccurred,);
             }
           },
         )));
@@ -95,7 +96,7 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
               visible: true,
               child: Center(
                 child: Text(
-                  'Device is offline',
+                  AppStrings.deviceOffline,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     color: AppColors.dangerBackground,

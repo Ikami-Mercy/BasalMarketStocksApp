@@ -1,6 +1,6 @@
+import 'package:basal_test/utils/resources/strings.dart';
 import 'package:data/blocs/search/search_cubit.dart';
 import 'package:data/blocs/search/search_state.dart';
-import 'package:data/blocs/stocks/stock_state.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
@@ -88,10 +88,10 @@ class SearchPage extends SearchDelegate {
           );
         }
         if (state is ErrorSearchState){
-          return const ErrorStatePage( message: "The symbol you have searched is not found",);
+          return const ErrorStatePage( message: AppStrings.symbolNotFound,);
         }
         else {
-          return const ErrorStatePage(message:"Search for a stock symbol or exchange");
+          return const ErrorStatePage(message:AppStrings.searchForSymbol);
         }
       },
     ));

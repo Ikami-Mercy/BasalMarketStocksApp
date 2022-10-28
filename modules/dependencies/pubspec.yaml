@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -38,6 +38,7 @@ dependencies:
   dio: 4.0.6
   retrofit: ^3.0.1+1
   json_annotation: 4.6.0
+  internet_connection_checker: 1.0.0+1
 
   # Caching
   flutter_secure_storage: 5.0.2

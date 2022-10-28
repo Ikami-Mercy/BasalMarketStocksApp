@@ -1,3 +1,4 @@
+import 'package:basal_test/utils/resources/strings.dart';
 import 'package:domain/models/stock_data.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class StockItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Exchange',
+                    AppStrings.exchange,
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.textColorGray,
@@ -86,7 +87,7 @@ class StockItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Open : ${stock.open}',
+                    '${AppStrings.open} ${stock.open}',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.textColorGray,
@@ -96,7 +97,7 @@ class StockItemWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 4,),
                   Text(
-                    'Low : ${stock.low}',
+                    '${AppStrings.low} ${stock.low}',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.textColorGray,
@@ -120,7 +121,7 @@ class StockItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Close : ${stock.close}',
+                    '${AppStrings.close} ${stock.close}',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.textColorGray,
@@ -130,7 +131,7 @@ class StockItemWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 4,),
                   Text(
-                    'High : ${stock.high}',
+                    '${AppStrings.high} ${stock.high}',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.textColorGray,
