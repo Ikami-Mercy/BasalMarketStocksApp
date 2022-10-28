@@ -55,7 +55,12 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
           onRefresh: () => Future.sync(
               () => context.read<StockCubit>().loadStockMarketData()),
           child: SafeArea(
-            child: BlocBuilder<StockCubit, StockState>(
+            child: BlocConsumer<StockCubit, StockState>(
+              listener: (ctx, state) async {
+                if (state is ErrorWithCachedStockState) {
+                  showToastUI(state.errorMessage,error: true);
+                }
+              },
               buildWhen: (prevState, currentState) {
                 return currentState is LoadingStockState ||
                     currentState is SuccessStockState ||

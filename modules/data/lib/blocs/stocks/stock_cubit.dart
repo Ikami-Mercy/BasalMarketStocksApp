@@ -32,11 +32,19 @@ class StockCubit extends Cubit<StockState> {
         if (locallySavedStocks.isEmpty) {
           emit(ErrorStockState(errorMessage: response.error??'Unexpected error occurred'));
         }
+        else{
+          emit(ErrorWithCachedStockState(errorMessage: response.error??'Unexpected error occurred'));
+
+        }
       }
     } catch (e) {
       Fimber.e("Error fetching Stock Market Data: $e", ex: e);
       if (locallySavedStocks.isEmpty) {
         emit(const ErrorStockState(errorMessage:'Unexpected error occurred'));
+      }
+      else{
+        emit(const ErrorWithCachedStockState(errorMessage:'Unexpected error occurred'));
+
       }
     }
   }

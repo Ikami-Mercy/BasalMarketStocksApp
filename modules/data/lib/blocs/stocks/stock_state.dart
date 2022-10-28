@@ -47,3 +47,9 @@ class EmptyStockFilteredState extends StockState{
   @override
   List<Object?> get props => [];
 }
+class ErrorWithCachedStockState extends StockState{
+  final String errorMessage;
+  const ErrorWithCachedStockState({required this.errorMessage});
+  @override
+  List<Object?> get props => [errorMessage];
+}

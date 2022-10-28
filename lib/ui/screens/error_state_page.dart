@@ -1,3 +1,5 @@
+import 'package:data/blocs/stocks/stock_cubit.dart';
+import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/no_internet_widget.dart';
@@ -24,7 +26,8 @@ class _ErrorStatePageState extends State<ErrorStatePage> {
           Center(
             child: Text(
               widget.message,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
         ],

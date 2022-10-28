@@ -18,12 +18,12 @@ dependencies:
   flutter_svg: ^1.0.3
   flutter_typeahead: ^4.0.0
   loading_indicator: ^3.0.2
-  shimmer: ^2.0.0
   infinite_scroll_pagination: ^3.2.0
   jwt_decode: ^0.3.1
   syncfusion_flutter_datepicker: ^20.3.52
   intl: ^0.17.0
   splash_screen_view: ^3.0.0
+  fluttertoast: ^8.0.8
 
 
   # State Management

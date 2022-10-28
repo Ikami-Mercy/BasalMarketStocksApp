@@ -1,3 +1,4 @@
+import 'package:basal_test/utils/resources/strings.dart';
 import 'package:data/blocs/stocks/stock_cubit.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ void showDateRangeDialog(BuildContext context) {
       builder: (BuildContext context) {
         return AlertDialog(
             title: const Text(
-              'SELECT RANGE',
+              AppStrings.selectRange,
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -27,15 +28,14 @@ void showDateRangeDialog(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       MaterialButton(
-                        child: const Text("CANCEL"),
+                        child: const Text(AppStrings.cancel),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                       ),
                       MaterialButton(
-                        child: const Text("OK"),
+                        child: const Text(AppStrings.ok),
                         onPressed: () {
-                          //PASS SELECTED DATES HERE
                           context.read<StockCubit>().filterStockDataByDate(startDate, endDate);
                           Navigator.pop(context);
                         },
@@ -67,16 +67,25 @@ Widget getDateRangePicker() {
 }
 
 void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-  Fimber.i("Selected date range is ${args.value}");
   if (args.value.startDate != null) {
     startDate = DateFormat('yyyy-MM-dd HH:mm:ss')
         .format(args.value.startDate);
-    Fimber.i("SELECTED START DATE IS $startDate");
 
   }
   if (args.value.endDate != null) {
     endDate = DateFormat('yyyy-MM-dd HH:mm:ss')
         .format(args.value.endDate);
   }
-
+}
+/// Displays Toast
+void showToastUI(String message, {bool error = false, bool longLength = false}) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: longLength ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT,
+    gravity: ToastGravity.SNACKBAR,
+    timeInSecForIosWeb: 1,
+    backgroundColor: error ? Colors.red : Colors.lightBlue,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
 }
