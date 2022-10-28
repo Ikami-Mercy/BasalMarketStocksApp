@@ -12,4 +12,5 @@ class AppStrings{
   static const String close = 'Close :';
   static const String high = 'High :';
   static const String splashString = 'BASALT';
+  static const String validationError = 'Validation error occurred';
 }

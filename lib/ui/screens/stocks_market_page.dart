@@ -77,15 +77,14 @@ class _StocksMarketPageState extends State<StocksMarketPage> {
                 return stockDataUILoaded(
                     state.stockData,);
               }
-              if (state is EmptyStockFilteredState) {
-                return const ErrorStatePage(
-                  message: AppStrings.noDataFound,
-                );
-              } else {
-                return const ErrorStatePage(
-                  message: AppStrings.errorOccurred,
+               else if(state is ErrorStockState) {
+                return ErrorStatePage(
+                  message: state.errorMessage,
                 );
               }
+              return const ErrorStatePage(
+                message: AppStrings.noDataFound,
+              );
             },
           ),
         ));

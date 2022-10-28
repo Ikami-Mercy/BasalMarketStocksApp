@@ -28,10 +28,15 @@ class StockCubit extends Cubit<StockState> {
             'SuccessStockState emitted and page count is: ${response.extras}');
         emit(SuccessStockState(stockData: response.data!));
       }
+      else{
+        if (locallySavedStocks.isEmpty) {
+          emit(ErrorStockState(errorMessage: response.error??'Unexpected error occurred'));
+        }
+      }
     } catch (e) {
       Fimber.e("Error fetching Stock Market Data: $e", ex: e);
       if (locallySavedStocks.isEmpty) {
-        emit(ErrorStockState());
+        emit(const ErrorStockState(errorMessage:'Unexpected error occurred'));
       }
     }
   }
@@ -60,7 +65,7 @@ class StockCubit extends Cubit<StockState> {
       }
     } catch (e) {
       Fimber.e("Error filtering Stock Data by date: $e", ex: e);
-      emit(ErrorStockState());
+      emit(const ErrorStockState(errorMessage:'Unexpected error occurred'));
     }
   }
 }

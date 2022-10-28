@@ -31,13 +31,34 @@ class StockRepository implements IStockRepository {
       }).toList();
       var stocksToSaveLocally = formattedResponse ?? [];
       if (stocksToSaveLocally.isNotEmpty) {
-        Fimber.i("stocksToSaveLocally is not empty");
         _stockDao.deleteStockData();
         _stockDao.saveStocks(stocksToSaveLocally);
       }
       return NetworkResponse(true,
           data: dtoMapper.mapFromDtoListToDomain(formattedResponse ?? []),
           extras: response.pagination?.count);
+    } on DioError catch (dioError) {
+      var errorMessage = dioError.message;
+      var responseStatusCode = dioError.response?.statusCode;
+      if (errorMessage.toString().contains('SocketException')) {
+        return NetworkResponse(false, error: 'You have no internet connection');
+      }
+      if (responseStatusCode == 401) {
+        return NetworkResponse(false,
+            error: 'An invalid API access key was supplied');
+      } else if (responseStatusCode == 403) {
+        return NetworkResponse(false,
+            error: 'Access is not supported on the current subscription plan');
+      } else if (responseStatusCode == 404) {
+        return NetworkResponse(false, error: 'Resource not found.');
+      } else if (responseStatusCode == 429) {
+        return NetworkResponse(false,
+            error: 'Your user account has reached the rate limit.');
+      } else if (responseStatusCode == 500) {
+        return NetworkResponse(false, error: 'A server error occurred.');
+      } else {
+        return NetworkResponse(false);
+      }
     } catch (e) {
       Fimber.e("Error fetching stock market data  $e", ex: e);
       return NetworkResponse(false);

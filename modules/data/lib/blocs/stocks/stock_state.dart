@@ -26,8 +26,10 @@ class SuccessStockState extends StockState{
 }
 
 class ErrorStockState extends StockState{
+  final String errorMessage;
+  const ErrorStockState({required this.errorMessage});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [errorMessage];
 }
 class EmptyStockState extends StockState{
   @override
