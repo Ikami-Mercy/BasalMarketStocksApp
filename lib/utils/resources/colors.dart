@@ -9,6 +9,7 @@ class AppColors{
   static Color colorGray7 = HexColor('909399');
   static Color colorBackground = HexColor('F2F2F2');
   static Color dangerBackground = HexColor('9B101C');
+  static Color successStateColor = HexColor('B8F5A8');
 
 
 }

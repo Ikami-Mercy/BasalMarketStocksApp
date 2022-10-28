@@ -8,8 +8,6 @@ import '../widgets/stocks_widget.dart';
 import 'error_state_page.dart';
 
 class SearchPage extends SearchDelegate {
-// first overwrite to
-// clear the search text
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -23,7 +21,6 @@ class SearchPage extends SearchDelegate {
     ];
   }
 
-// second overwrite to pop out of search menu
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
@@ -35,7 +32,6 @@ class SearchPage extends SearchDelegate {
     );
   }
 
-// third overwrite to show query result
   @override
   Widget buildResults(BuildContext context) {
     context.read<SearchCubit>().filterStockDataBySearch(query.toUpperCase());
@@ -43,8 +39,6 @@ class SearchPage extends SearchDelegate {
     return resultsWidget();
   }
 
-// last overwrite to show the
-// querying process at the runtime
   @override
   Widget buildSuggestions(BuildContext context) {
     context.read<SearchCubit>().filterStockDataBySearch(query.toUpperCase());
@@ -87,11 +81,14 @@ class SearchPage extends SearchDelegate {
             ),
           );
         }
-        if (state is ErrorSearchState){
-          return const ErrorStatePage( message: AppStrings.symbolNotFound,isConnectedToInternet: false,);
-        }
-        else {
-          return const ErrorStatePage(message:AppStrings.searchForSymbol,isConnectedToInternet: false,);
+        if (state is ErrorSearchState) {
+          return const ErrorStatePage(
+            message: AppStrings.symbolNotFound,
+          );
+        } else {
+          return const ErrorStatePage(
+            message: AppStrings.searchForSymbol,
+          );
         }
       },
     ));

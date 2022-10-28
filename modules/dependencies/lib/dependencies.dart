@@ -5,7 +5,6 @@ export 'package:equatable/equatable.dart';
 export 'package:fimber/fimber.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_dotenv/flutter_dotenv.dart';
-export 'package:flutter_typeahead/flutter_typeahead.dart';
 export 'package:get_it/get_it.dart';
 export 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 export 'package:injectable/injectable.dart';
@@ -17,6 +16,8 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:syncfusion_flutter_datepicker/datepicker.dart';
 export 'package:intl/intl.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
+export 'package:internet_connection_checker/internet_connection_checker.dart';
+export 'package:provider/provider.dart';
 
 
 

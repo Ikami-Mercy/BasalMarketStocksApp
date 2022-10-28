@@ -1,5 +1,7 @@
 import 'package:basal_test/ui/screens/stocks_market_page.dart';
 import 'package:basal_test/utils/resources/styles.dart';
+import 'package:data/blocs/internet/network_bloc.dart';
+import 'package:data/blocs/internet/network_event.dart';
 import 'package:data/blocs/search/search_cubit.dart';
 import 'package:data/blocs/simple_bloc_observer.dart';
 import 'package:data/blocs/stocks/stock_cubit.dart';
@@ -38,6 +40,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(create: (_) => getIt<StockCubit>()),
         BlocProvider(create: (_) => getIt<SearchCubit>()),
+        BlocProvider(create: (_) => getIt<NetworkBloc>()..add(NetworkObserve())),
       ],
       child: MaterialApp(
         title: 'BasaltMarketStock App ',

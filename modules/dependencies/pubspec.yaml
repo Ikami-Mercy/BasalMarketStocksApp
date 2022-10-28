@@ -30,6 +30,7 @@ dependencies:
   flutter_bloc: ^8.0.0
   flutter_hooks: ^0.18.1
   equatable: ^2.0.3
+  provider: ^6.0.3
 
   # DI
   get_it: ^7.2.0
