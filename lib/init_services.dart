@@ -21,7 +21,6 @@ class InitServices {
     try {
       if (isProd) {
         await dotenv.load(fileName: Assets.ENV_PRODUCTION);
-        Fimber.i('Dot env is loaded!');
         await _initDI(Env.production);
       } else {
         await dotenv.load(fileName: Assets.ENV_TESTING);
