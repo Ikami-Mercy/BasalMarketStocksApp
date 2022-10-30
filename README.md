@@ -89,8 +89,8 @@ The domain module deals with the model classes which hold the data used in the `
 Download a sample-apk from sample-apk directory in the project's root folder.
 
 ## Screenshots
-<img src="screenshots/1.png" width="200"> <img src="screenshots/2.png" width="200"> <img src="screenshots/3.png" width="200">
-<img src="screenshots/4.png" width="200"><img src="screenshots/5.png" width="200">
+<img src="screenshots/1.png" width="200"> <img src="screenshots/two.png" width="200"> <img src="screenshots/3.png" width="200">
+<img src="screenshots/4.png" width="200"><img src="screenshots/5.png" width="200"><img src="screenshots/6.png" width="200">
 
 ## External Links
 - [Dependency Injection](https://www.youtube.com/watch?v=KNcP8z0hWqs)
